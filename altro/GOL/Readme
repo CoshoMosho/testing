@@ -1,0 +1,46 @@
+-------------------------Game of life parallel implementation----------------------------
+|											|
+|	Project on behalf of the course of Parallel Processing (6th Semester)		|
+|											|
+|		Computer Engineering and Informatics Department (CEID)			|
+|				University of Patras					|
+|											|
+|				      Author:						|
+|			Bechtsoudis Anestis - mpechtsoud@ceid.upatras.gr		|
+-----------------------------------------------------------------------------------------
+
+1. Included files:
+
+gol_threads.c 	: C Pthread implementation of Game of Life
+gol_openmp.c  	: C OpenMP implementation of Game of Life
+Makefile	: Makefile to compile the sources and create executables
+Random		: Text input file with random alive cells (dimensions=80x25)
+Shapes		: Text input file with shape followin cells (dimensions=80x25)
+Readme		: Info file
+GOLReport.pdf	: Project report
+Measures.xls	: Excel sheet with measurements
+
+2. How to compile:
+
+	Untar the files:
+	tar xvfz GameOfLife.tar.gz
+		
+	Run make to compile the sources:
+	make
+
+	Call the executables:
+	./executable OPTIONS
+
+	executable : GOLPT or GOLOMP accordingly
+	OPTIONS:
+		-n : Number of threads (Default 1)
+		-h : Boards height (Raws) (Default 25)
+		-w : Boards width (Columns) (Default 80)
+		-f : Input file (In default mode should give one)
+		-b : Bench mode
+
+ps1. Console dimensions should be set above width x height+4 in order to have a full view of the board.
+     In too large dimensions the board is not printed in console and is available only in bench mode.
+ps2. Screen is refreshed with the result of next round approximately every 1/2 sec.
+
+3. Enjoy the play! :)

@@ -1,0 +1,16 @@
+{
+        "version": "0.2.0",
+    "configurations": [
+
+        
+        // {
+        //     "name": "C Launch",
+        //     "type":"cppdbg",
+        //     "request": "launch",
+        //     "program": "/home/gigi/Desktop/Foundations_of_HPC_2022/Basic/.vscode/GameOfLife/testParameters",
+        //     // "args": ["-i","-r","-k","-r","-f test","-n 10","-s 12"],
+        //     "args": ["-f","100"],
+        //     "cwd": "/home/gigi/Desktop/Foundations_of_HPC_2022/Basic/.vscode/GameOfLife"
+        // }
+    ]
+}
