@@ -7,12 +7,12 @@
 int main(){
    
    long start, stop;
-   int lengthMod = 8*MB -1;
+   int lengthMod = 8*KB -1;
    double totalTime, timeTaken;
    int tmp;
    double avg;
 
-   static int array[8*MB];
+   static int array[8*KB];
    int i,j;
    unsigned int k;
 /*Change the step of array iteration and observe the change in time taken for computation.
@@ -21,7 +21,7 @@ The step('i' value) at which there is a significant change in time taken will co
       totalTime=0;
       for(j=0;j<6;j++){
          start = clock();
-         for(k=0;k<512*MB;k++){
+         for(k=0;k<512*KB;k++){
             tmp +=array[(k*i)&lengthMod];   
          }
          timeTaken = (double)(clock() - start)/CLOCKS_PER_SEC;
