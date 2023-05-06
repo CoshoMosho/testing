@@ -412,7 +412,7 @@ void generate_static(int row_length, int n_rows, unsigned char *base_cells, cons
     fill_borders(temp_pointer, actual_borders, row_length, n_rows);
     if (dumb_count == dump_step)
     {
-      sprintf(filename, "./shots/snapshot_%05d.pgm", n);
+      sprintf(filename, "snapshot_%05d.pgm", n);
       write_pgm_image(temp_pointer, row_length, n_rows, MAX_VAL_PIXEL, filename);
       dumb_count = 0;
     }
@@ -422,7 +422,7 @@ void generate_static(int row_length, int n_rows, unsigned char *base_cells, cons
   }
   if (dump_step == 0)
   {
-    sprintf(filename, "./shots/snapshot_%05d.pgm", 1);
+    sprintf(filename, "snapshot_%05d.pgm", 1);
     write_pgm_image(reading_from_cells, row_length, n_rows, MAX_VAL_PIXEL, filename);
     dumb_count = 0;
   }
@@ -478,14 +478,14 @@ void generate_ordered(int row_length, int n_rows, unsigned char *base_cells, con
     fill_borders(base_cells, actual_borders, row_length, n_rows);
     if (dumb_count == dump_step)
     {
-      sprintf(filename, "./shots/snapshot_%05d.pgm", n);
+      sprintf(filename, "snapshot_%05d.pgm", n);
       write_pgm_image(base_cells, row_length, n_rows, MAX_VAL_PIXEL, filename);
       dumb_count = 0;
     }
   }
   if (dump_step == 0)
   {
-    sprintf(filename, "./shots/snapshot_%05d.pgm", 1);
+    sprintf(filename, "snapshot_%05d.pgm", 1);
     write_pgm_image(base_cells, row_length, n_rows, MAX_VAL_PIXEL, filename);
     dumb_count = 0;
   }
@@ -525,7 +525,6 @@ int main(int argc, int *argv[])
     write_pgm_image(playground, x_ground_size, y_ground_size, maxval, "check.pgm");
     generate_static(x_ground_size, y_ground_size, playground, iterations, dump_step);
     fine = clock();
-
     break;
 
   case 0:
