@@ -10,7 +10,9 @@ int main(int argc, char** argv) {
     inizio = clock();
     // Initialize the MPI environment
     MPI_Init(NULL, NULL);
-
+    clock_t inizio, fine;
+    double tempo_di_esecuzione;
+    inizio = clock();
     // Get the number of processes
     int world_size;
     MPI_Comm_size(MPI_COMM_WORLD, &world_size);
@@ -36,13 +38,13 @@ int main(int argc, char** argv) {
     MPI_Bcast(&dati, 1, MPI_INT, 0, MPI_COMM_WORLD);
     printf("from processor %s, rank %d out of %d processors with value %d\n",
            processor_name, world_rank, world_size,dati);
-
-
-    // Finalize the MPI environment.
-    MPI_Finalize();
     fine = clock();
     tempo_di_esecuzione = ((double)(fine - inizio) / CLOCKS_PER_SEC) * 1000;
     printf("Tempo di esecuzione: %f ms\n", tempo_di_esecuzione);
+    
+
+    // Finalize the MPI environment.
+    MPI_Finalize();
     
 }
 
