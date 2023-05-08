@@ -30,7 +30,7 @@ int main(int argc, char** argv) {
     printf("Hello world from processor %s, rank %d out of %d processors\n",
            processor_name, world_rank, world_size);
 
-    doStuff();
+    //doStuff();
 
     int dati = 1242142;
     MPI_Bcast(&dati, 1, MPI_INT, 0);
@@ -46,6 +46,6 @@ int main(int argc, char** argv) {
     
 }
 
-void doStuff(){
+//void doStuff(){
     
 }
