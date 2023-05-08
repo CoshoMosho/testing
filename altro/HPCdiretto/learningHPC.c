@@ -33,7 +33,7 @@ int main(int argc, char** argv) {
     //doStuff();
 
     int dati = 1242142;
-    MPI_Bcast(&dati, 1, MPI_INT, 0);
+    MPI_Bcast(&dati, 1, MPI_INT, 0, MPI_COMM_WORLD);
     printf("from processor %s, rank %d out of %d processors with value %d\n",
            processor_name, world_rank, world_size,dati);
 
