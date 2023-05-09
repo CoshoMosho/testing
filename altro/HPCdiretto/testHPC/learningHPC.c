@@ -37,7 +37,7 @@ int main(int argc, char** argv) {
 
 
        test = test + 1;
-       MPI_Recv(&test, 0, MPI_INT,  world_rank - 1. 0, MPI_COMM_WORLD, 0);
+       MPI_Recv(&test, 0, MPI_INT,  world_rank - 1. 0, MPI_COMM_WORLD, MPI_Status status);
 
     int dati = 1242142;
     MPI_Bcast(&dati, 1, MPI_INT, 0, MPI_COMM_WORLD);
