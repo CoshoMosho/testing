@@ -23,8 +23,8 @@ int main(int argc, char** argv) {
     }
 
     // Processo 0 invia un messaggio a processo 1
-    if (rank == MPI_MAX_PROCESSOR_NAME) {
-        data = MPI_MAX_PROCESSOR_NAME;
+    if (rank == size) {
+        data = size;
         MPI_Send(&data, 1, MPI_INT,  0, tag, MPI_COMM_WORLD);
         printf("Processo %d ha inviato il valore %d.\n", rank, data);
     }else{
@@ -35,7 +35,7 @@ int main(int argc, char** argv) {
     }
     // Processo 1 riceve il messaggio da processo 0
     if (rank == 0) {
-        MPI_Recv(&data, 1, MPI_INT, MPI_MAX_PROCESSOR_NAME, tag, MPI_COMM_WORLD, &status);
+        MPI_Recv(&data, 1, MPI_INT, size, tag, MPI_COMM_WORLD, &status);
         printf("Processo %d ha ricevuto il valore %d.\n", rank, data);
     }else{
         MPI_Recv(&data, 1, MPI_INT, rank - 1, tag, MPI_COMM_WORLD, &status);
