@@ -1,48 +1,26 @@
 #include <stdio.h>
+#include <stdlib.h>
 #include <mpi.h>
 
 int main(int argc, char** argv) {
-    int rank, size, tag = 0;
-    int data = 0;
-    MPI_Status status;
-
-    // Inizializzazione di MPI
+    int rank, size;
     MPI_Init(&argc, &argv);
-
-    // Ottenere il numero di processi
+    MPI_Comm_rank(MPI_COMM_WORLD, &rank);
     MPI_Comm_size(MPI_COMM_WORLD, &size);
 
-    // Ottenere il rank del processo corrente
-    MPI_Comm_rank(MPI_COMM_WORLD, &rank);
+    int data = rank; // dati da inviare
 
-    // Se ci sono meno di due processi, uscire
-    if (size < 2) {
-        printf("Questo programma richiede almeno due processi.\n");
-        MPI_Finalize();
-        return 1;
+    MPI_Status status;
+    if (rank != 0) {
+        MPI_Send(&data, 1, MPI_INT, (rank + 1) % size, 0, MPI_COMM_WORLD);
+    } else {
+        MPI_Send(&data, 1, MPI_INT, 1, 0, MPI_COMM_WORLD);
     }
 
-    // Processo 0 invia un messaggio a processo 1
-    if (rank == size) {
-        data = size;
-        MPI_Send(&data, 1, MPI_INT,  0, tag, MPI_COMM_WORLD);
-        printf("Processo %d ha inviato il valore %d.\n", rank, data);
-    }else{
-          data = rank;
-        MPI_Send(&data, 1, MPI_INT,  rank + 1, tag, MPI_COMM_WORLD);
-        printf("Processo %d ha inviato il valore %d.\n", rank, data);
-  
-    }
-    // Processo 1 riceve il messaggio da processo 0
-    if (rank == 0) {
-        MPI_Recv(&data, 1, MPI_INT, size, tag, MPI_COMM_WORLD, &status);
-        printf("Processo %d ha ricevuto il valore %d.\n", rank, data);
-    }else{
-        MPI_Recv(&data, 1, MPI_INT, rank - 1, tag, MPI_COMM_WORLD, &status);
-        printf("Processo %d ha ricevuto il valore %d.\n", rank, data);
-    }
+    MPI_Recv(&data, 1, MPI_INT, (rank - 1 + size) % size, 0, MPI_COMM_WORLD, &status);
 
-    // Finalizzazione di MPI
+    printf("Processo %d: ho ricevuto il valore %d dal processo %d\n", rank, data, (rank - 1 + size) % size);
+
     MPI_Finalize();
     return 0;
 }
