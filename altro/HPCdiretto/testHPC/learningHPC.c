@@ -32,17 +32,17 @@ int main(int argc, char** argv) {
 
     //doStuff();     
 
-    int test = 0;
+    /* int test = 0;
     MPI_Send(&test,1,MPI_INT, world_rank + 1, 0, MPI_COMM_WORLD );
 
 
        test = test + 1;
        MPI_Recv(&test, 0, MPI_INT,  world_rank - 1. 0, MPI_COMM_WORLD, MPI_Status status);
-
-    int dati = 1242142;
+ */
+  /*   int dati = 1242142;
     MPI_Bcast(&dati, 1, MPI_INT, 0, MPI_COMM_WORLD);
     printf("from processor %s, rank %d out of %d processors with value %d\n",
-           processor_name, world_rank, world_size,test);
+           processor_name, world_rank, world_size,test); */
     fine = clock();
     tempo_di_esecuzione = ((double)(fine - inizio) / CLOCKS_PER_SEC) * 1000;
     printf("Tempo di esecuzione: %f ms\n", tempo_di_esecuzione);
