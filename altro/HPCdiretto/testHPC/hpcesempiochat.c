@@ -23,12 +23,14 @@ int main(int argc, char** argv) {
 
     MPI_Recv(&data, 1, MPI_INT, (rank - 1 + size) % size, 0, MPI_COMM_WORLD, &status);
 
-    if (data == i + 1)
+    printf("data %d e iterazione %d", data, i);
+
+    /* if (data == i + 1)
     {
         printf("iterazione %d di processo %d: ho ricevuto il valore %d dal processo %d\n",i, rank, data, (rank - 1 + size) % size);
     }else{
         printf("errore del cazzo");
-    }
+    } */
     
     
     }
