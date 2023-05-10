@@ -8,13 +8,13 @@ int main(int argc, char** argv) {
     MPI_Comm_rank(MPI_COMM_WORLD, &rank);
     MPI_Comm_size(MPI_COMM_WORLD, &size);
 
-    int data = rank; // dati da inviare
+    int data = 0; // dati da inviare
 
     MPI_Status status;
 
     for (size_t i = 0; i < 100; i++)
     {
-        
+        data = i;
     if (rank != 0) {
         MPI_Send(&data, 1, MPI_INT, (rank + 1) % size, 0, MPI_COMM_WORLD);
     } else {
@@ -23,7 +23,13 @@ int main(int argc, char** argv) {
 
     MPI_Recv(&data, 1, MPI_INT, (rank - 1 + size) % size, 0, MPI_COMM_WORLD, &status);
 
-    printf("iterazione %d di processo %d: ho ricevuto il valore %d dal processo %d\n",i, rank, data, (rank - 1 + size) % size);
+    if (data == i + 1)
+    {
+        printf("iterazione %d di processo %d: ho ricevuto il valore %d dal processo %d\n",i, rank, data, (rank - 1 + size) % size);
+    }else{
+        printf("errore del cazzo");
+    }
+    
     
     }
     
