@@ -1,7 +1,38 @@
-#include <mpi.h>
 #include <stdio.h>
+#include <stdlib.h>
+#include <mpi.h>
 
 int main(int argc, char** argv) {
+    int rank, size;
+    MPI_Init(&argc, &argv);
+    MPI_Comm_rank(MPI_COMM_WORLD, &rank);
+    MPI_Comm_size(MPI_COMM_WORLD, &size);
+
+    int data = rank; // dati da inviare
+
+    MPI_Status status;
+
+    for (size_t i = 0; i < 100; i++)
+    {
+        
+    if (rank != 0) {
+        MPI_Send(&data, 1, MPI_INT, (rank + 1) % size, 0, MPI_COMM_WORLD);
+    } else {
+        MPI_Send(&data, 1, MPI_INT, 1, 0, MPI_COMM_WORLD);
+    }
+
+    MPI_Recv(&data, 1, MPI_INT, (rank - 1 + size) % size, 0, MPI_COMM_WORLD, &status);
+
+    printf("Processo %d: ho ricevuto il valore %d dal processo %d\n", rank, data, (rank - 1 + size) % size);
+    
+    }
+    
+    MPI_Finalize();
+    return 0;
+}
+
+
+/* int main(int argc, char** argv) {
     int size, rank;
     int n = 5;  // numero di iterazioni
     int message;  // messaggio da inviare e ricevere
@@ -23,4 +54,4 @@ int main(int argc, char** argv) {
         printf("Iterazione %d: processo %d ha ricevuto il messaggio %d\n", i, rank, message);
     }
     MPI_Finalize();
-}
+} */
