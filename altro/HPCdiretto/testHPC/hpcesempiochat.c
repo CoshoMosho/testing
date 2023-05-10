@@ -23,7 +23,7 @@ int main(int argc, char** argv) {
 
     MPI_Recv(&data, 1, MPI_INT, (rank - 1 + size) % size, 0, MPI_COMM_WORLD, &status);
 
-    printf("Processo %d: ho ricevuto il valore %d dal processo %d\n", rank, data, (rank - 1 + size) % size);
+    printf("iterazione %d di processo %d: ho ricevuto il valore %d dal processo %d\n",i, rank, data, (rank - 1 + size) % size);
     
     }
     
