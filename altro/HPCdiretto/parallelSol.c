@@ -98,7 +98,8 @@ void output_life_matrix( int ** matrix,
 
 /* uniformly disdributed random # in {0,1} */
 double rand01()
-{
+{ 
+  
   return  (double)rand()/(double)RAND_MAX;
 }
 
