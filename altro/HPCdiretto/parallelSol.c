@@ -99,7 +99,7 @@ void output_life_matrix( int ** matrix,
 /* uniformly disdributed random # in {0,1} */
 double rand01()
 { 
-  
+
   return  (double)rand()/(double)RAND_MAX;
 }
 
@@ -278,7 +278,7 @@ int main( int argc, char * argv[] )
 
   /* Ouput initial matrix */
   if( myrank == 0 )
-    output_life_matrix( matrix, 0, 0 );
+    //output_life_matrix( matrix, 0, 0 );
 
 
   /* iterate over generations */
