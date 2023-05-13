@@ -8,6 +8,7 @@
 #include <math.h>
 #include <stdlib.h>
 #include <mpi.h>          /* MPI header file */
+#include <time.h>
 
 #define DEAD 0
 #define ALIVE 1
@@ -220,6 +221,11 @@ void strips_boundary_exchange( int **matrix, int *start_strip,
 
 int main( int argc, char * argv[] )
 {
+  clock_t start, end;
+  double exec_time;
+  start = clock();
+ 
+    
   int i, j, iter, changes, total_changes;
   int **matrix, **temp;
 
@@ -347,11 +353,13 @@ int main( int argc, char * argv[] )
 	    }
 
 	  /* display current generation */
-	  output_life_matrix( matrix, iter, total_changes );
+	  //output_life_matrix( matrix, iter, total_changes );
 
 	}
     }
-
+  end = clock();
+  exec_time = ((double)(end - start) / CLOCKS_PER_SEC) * 1000;
+  printf("exec_time: %f ms\n", exec_time);
                           /* out of the virtual machine */
   MPI_Finalize();
   exit(0);
