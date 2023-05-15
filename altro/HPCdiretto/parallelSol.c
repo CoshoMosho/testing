@@ -8,6 +8,7 @@
 #include <math.h>
 #include <stdlib.h>
 #include <mpi.h>          /* MPI header file */
+#include <time.h>
 
 #define DEAD 0
 #define ALIVE 1
@@ -228,6 +229,10 @@ int main( int argc, char * argv[] )
   int myrank, MPIsize, pe;
   int ipointer, strip_size, mesg_size, from_strip;
 
+  clock_t start, end;//, start_parallel, end_parallel;
+  double exec_time_total;//, exec_time_parallel;
+  start = clock();
+
   MPI_Status recv_status;
 
 
@@ -271,7 +276,7 @@ int main( int argc, char * argv[] )
 
   /* Ouput initial matrix */
   if( myrank == 0 )
-    output_life_matrix( matrix, 0, 0 );
+    //output_life_matrix( matrix, 0, 0 );
 
 
   /* iterate over generations */
@@ -347,12 +352,16 @@ int main( int argc, char * argv[] )
 	    }
 
 	  /* display current generation */
-	  output_life_matrix( matrix, iter, total_changes );
+	  //output_life_matrix( matrix, iter, total_changes );
 
 	}
     }
 
                           /* out of the virtual machine */
   MPI_Finalize();
+  end = clock();
+  exec_time_total = ((double)(end - start) / CLOCKS_PER_SEC) * 1000;
+  printf("exec_time_total: %f ms\n", exec_time_total);
+  printf("end of the program");
   exit(0);
 }
