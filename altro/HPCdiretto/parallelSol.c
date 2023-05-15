@@ -360,10 +360,11 @@ int main( int argc, char * argv[] )
 }
  
                           /* out of the virtual machine */
-  MPI_Finalize();
+  
   end = clock();
   exec_time_total = ((double)(end - start) / CLOCKS_PER_SEC) * 1000;
   printf("exec_time_total: %f ms\n", exec_time_total);
+  MPI_Finalize();
   printf("end of the program");
   exit(0);
 }
