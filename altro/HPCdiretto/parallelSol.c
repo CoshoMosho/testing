@@ -15,7 +15,7 @@
 
 #define generations 75
 
-#define matrix_size 100
+#define matrix_size 10000
 
 
 /* For each element of the matrix apply the */
@@ -222,8 +222,8 @@ void strips_boundary_exchange( int **matrix, int *start_strip,
 
 int main( int argc, char * argv[] )
 {
-  clock_t start, end;
-  double exec_time;
+  clock_t start, end;//, start_parallel, end_parallel;
+  double exec_time_total;//, exec_time_parallel;
   start = clock();
  
     
@@ -359,8 +359,8 @@ int main( int argc, char * argv[] )
 	}
     }
   end = clock();
-  exec_time = ((double)(end - start) / CLOCKS_PER_SEC) * 1000;
-  printf("exec_time: %f ms\n", exec_time);
+  exec_time_total = ((double)(end - start) / CLOCKS_PER_SEC) * 1000;
+  printf("exec_time_total: %f ms\n", exec_time_total);
                           /* out of the virtual machine */
   MPI_Finalize();
   exit(0);
