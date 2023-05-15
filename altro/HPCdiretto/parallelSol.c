@@ -230,6 +230,10 @@ int main( int argc, char * argv[] )
   int ipointer, strip_size, mesg_size, from_strip;
 
 
+  clock_t start, end;//, start_parallel, end_parallel;
+  double exec_time_total;//, exec_time_parallel;
+  start = clock();
+
   MPI_Status recv_status;
 
 
@@ -239,9 +243,6 @@ int main( int argc, char * argv[] )
   MPI_Init(&argc, &argv);
 
 
-  clock_t start, end;//, start_parallel, end_parallel;
-  double exec_time_total;//, exec_time_parallel;
-  start = clock();
 
                           /* my rank - my id */
   MPI_Comm_rank(MPI_COMM_WORLD, &myrank);
