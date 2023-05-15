@@ -363,7 +363,7 @@ int main( int argc, char * argv[] )
   
 
                           /* out of the virtual machine */
-  
+    }
   end = MPI_Wtime();
   exec_time_total = (end - start) * 1000;
   printf("exec_time_total: %f ms\n", exec_time_total);
