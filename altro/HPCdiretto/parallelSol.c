@@ -229,9 +229,6 @@ int main( int argc, char * argv[] )
   int myrank, MPIsize, pe;
   int ipointer, strip_size, mesg_size, from_strip;
 
-  clock_t start, end;//, start_parallel, end_parallel;
-  double exec_time_total;//, exec_time_parallel;
-  start = clock();
 
   MPI_Status recv_status;
 
@@ -240,6 +237,12 @@ int main( int argc, char * argv[] )
 
                           /* init into MPI */
   MPI_Init(&argc, &argv);
+
+
+  clock_t start, end;//, start_parallel, end_parallel;
+  double exec_time_total;//, exec_time_parallel;
+  start = clock();
+
                           /* my rank - my id */
   MPI_Comm_rank(MPI_COMM_WORLD, &myrank);
                           /* how many processes in the virtual machine */
@@ -358,10 +361,11 @@ int main( int argc, char * argv[] )
     }
 
                           /* out of the virtual machine */
-  MPI_Finalize();
+  
   end = clock();
   exec_time_total = ((double)(end - start) / CLOCKS_PER_SEC) * 1000;
   printf("exec_time_total: %f ms\n", exec_time_total);
+  MPI_Finalize();
   printf("end of the program");
   exit(0);
 }
