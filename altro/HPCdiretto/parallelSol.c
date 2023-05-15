@@ -223,9 +223,9 @@ int main(int argc, char *argv[])
   /* init into MPI */
   MPI_Init(&argc, &argv);
 
-  double start, end;      
-  double exec_time_total; 
-  start = MPI_Wtime();
+  // double start, end;      
+  // double exec_time_total; 
+  // start = MPI_Wtime();
   
 
   /* my rank - my id */
@@ -340,9 +340,9 @@ int main(int argc, char *argv[])
 
       /* out of the virtual machine */
     }
-  end = MPI_Wtime();
-  exec_time_total = (end - start) * 1000;
-  printf("exec_time_total: %f ms\n", exec_time_total);
+  // end = MPI_Wtime();
+  // exec_time_total = (end - start) * 1000;
+  // printf("exec_time_total: %f ms\n", exec_time_total);
   MPI_Finalize();
   printf("end of the program");
   exit(0);
