@@ -8,7 +8,6 @@
 #include <math.h>
 #include <stdlib.h>
 #include <mpi.h>          /* MPI header file */
-#include <time.h>
 
 #define DEAD 0
 #define ALIVE 1
@@ -98,8 +97,7 @@ void output_life_matrix( int ** matrix,
 
 /* uniformly disdributed random # in {0,1} */
 double rand01()
-{ 
-
+{
   return  (double)rand()/(double)RAND_MAX;
 }
 
@@ -222,11 +220,6 @@ void strips_boundary_exchange( int **matrix, int *start_strip,
 
 int main( int argc, char * argv[] )
 {
-  clock_t start, end;//, start_parallel, end_parallel;
-  double exec_time_total;//, exec_time_parallel;
-  start = clock();
- 
-    
   int i, j, iter, changes, total_changes;
   int **matrix, **temp;
 
@@ -278,7 +271,7 @@ int main( int argc, char * argv[] )
 
   /* Ouput initial matrix */
   if( myrank == 0 )
-    //output_life_matrix( matrix, 0, 0 );
+    output_life_matrix( matrix, 0, 0 );
 
 
   /* iterate over generations */
@@ -354,17 +347,12 @@ int main( int argc, char * argv[] )
 	    }
 
 	  /* display current generation */
-	  //output_life_matrix( matrix, iter, total_changes );
+	  output_life_matrix( matrix, iter, total_changes );
 
 	}
-}
- 
+    }
+
                           /* out of the virtual machine */
-  
-  end = clock();
-  exec_time_total = ((double)(end - start) / CLOCKS_PER_SEC) * 1000;
-  printf("exec_time_total: %f ms\n", exec_time_total);
   MPI_Finalize();
-  printf("end of the program");
   exit(0);
 }
