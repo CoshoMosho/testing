@@ -223,10 +223,10 @@ int main(int argc, char *argv[])
   /* init into MPI */
   MPI_Init(&argc, &argv);
 
-  double start, end;      //, start_parallel, end_parallel;
-  double exec_time_total; //, exec_time_parallel;
+  double start, end;      
+  double exec_time_total; 
   start = MPI_Wtime();
-  ;
+  
 
   /* my rank - my id */
   MPI_Comm_rank(MPI_COMM_WORLD, &myrank);
