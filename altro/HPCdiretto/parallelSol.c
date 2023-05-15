@@ -230,9 +230,7 @@ int main( int argc, char * argv[] )
   int ipointer, strip_size, mesg_size, from_strip;
 
 
-  clock_t start, end;//, start_parallel, end_parallel;
-  double exec_time_total;//, exec_time_parallel;
-  start = clock();
+ 
 
   MPI_Status recv_status;
 
@@ -242,7 +240,9 @@ int main( int argc, char * argv[] )
                           /* init into MPI */
   MPI_Init(&argc, &argv);
 
-
+  double start, end;//, start_parallel, end_parallel;
+  double exec_time_total;//, exec_time_parallel;
+  start = MPI_Wtime();;
 
                           /* my rank - my id */
   MPI_Comm_rank(MPI_COMM_WORLD, &myrank);
@@ -359,12 +359,13 @@ int main( int argc, char * argv[] )
 	  //output_life_matrix( matrix, iter, total_changes );
 
 	}
-    }
+  
+  
 
                           /* out of the virtual machine */
   
-  end = clock();
-  exec_time_total = ((double)(end - start) / CLOCKS_PER_SEC) * 1000;
+  end = MPI_Wtime();
+  exec_time_total = (end - start) * 1000;
   printf("exec_time_total: %f ms\n", exec_time_total);
   MPI_Finalize();
   printf("end of the program");
