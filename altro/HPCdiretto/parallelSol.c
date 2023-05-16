@@ -8,6 +8,8 @@
 #include <math.h>
 #include <stdlib.h>
 #include <mpi.h>          /* MPI header file */
+#include <omp.h>
+
 
 #define DEAD 0
 #define ALIVE 1
@@ -28,6 +30,7 @@ void new_generation(  int ** matrix, int ** temp,
   /* For each element of the matrix apply the */
   /* life game rules                          */
   /* store under temp                         */
+  #pragma omp parallel for schedule(static)
   for (i = la; i <= lb; i++) 
     {
       for (j = 1; j <= matrix_size; j++) 
