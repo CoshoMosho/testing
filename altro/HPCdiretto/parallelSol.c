@@ -271,7 +271,7 @@ int main( int argc, char * argv[] )
 
   /* Ouput initial matrix */
   if( myrank == 0 )
-    //output_life_matrix( matrix, 0, 0 );
+    output_life_matrix( matrix, 0, 0 );
 
 
   /* iterate over generations */
@@ -347,7 +347,7 @@ int main( int argc, char * argv[] )
 	    }
 
 	  /* display current generation */
-	  //output_life_matrix( matrix, iter, total_changes );
+	  output_life_matrix( matrix, iter, total_changes );
 
 	}
     }
