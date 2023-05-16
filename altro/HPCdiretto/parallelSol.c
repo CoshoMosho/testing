@@ -14,7 +14,7 @@
 
 #define generations 75
 
-#define matrix_size 100
+#define matrix_size 10000
 
 
 /* For each element of the matrix apply the */
