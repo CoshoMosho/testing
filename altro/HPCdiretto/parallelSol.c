@@ -220,6 +220,9 @@ void strips_boundary_exchange( int **matrix, int *start_strip,
 
 int main( int argc, char * argv[] )
 {
+  double start, end;
+  double exec_time_total;
+
   int i, j, iter, changes, total_changes;
   int **matrix, **temp;
 
@@ -228,6 +231,7 @@ int main( int argc, char * argv[] )
   int myrank, MPIsize, pe;
   int ipointer, strip_size, mesg_size, from_strip;
 
+
   MPI_Status recv_status;
 
 
@@ -235,6 +239,8 @@ int main( int argc, char * argv[] )
 
                           /* init into MPI */
   MPI_Init(&argc, &argv);
+
+  start = MPI_Wtime();
                           /* my rank - my id */
   MPI_Comm_rank(MPI_COMM_WORLD, &myrank);
                           /* how many processes in the virtual machine */
@@ -351,6 +357,10 @@ int main( int argc, char * argv[] )
 
 	}
     }
+  end = MPI_Wtime();
+  exec_time_total = (end - start) * 1000;
+
+  printf("exec_time_total: %f ms\n", exec_time_total);
 
                           /* out of the virtual machine */
   MPI_Finalize();
