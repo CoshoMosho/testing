@@ -173,7 +173,7 @@ void decompose_domain( int *start_strip, int *end_strip,
 
 void strips_boundary_exchange( int **matrix, int *start_strip, 
 			       int *end_strip, int myrank, 
-			       int MPIsize )
+			       int MPIsize, int iter )
 {
   MPI_Status recv_status;
   int top_process, bot_process;
@@ -186,17 +186,21 @@ void strips_boundary_exchange( int **matrix, int *start_strip,
   if ( myrank % 2 != 0 )
     {
       if ( myrank < MPIsize-1 )  /* send to right - top */
-	MPI_Send( &matrix[end_strip[myrank]][0], matrix_size+2, 
+	printf("iter n %d of proc %d is sending to proc %d",myrank, top_process, iter);
+  MPI_Send( &matrix[end_strip[myrank]][0], matrix_size+2, 
 		  MPI_INT, top_process, 102, MPI_COMM_WORLD );
       if ( myrank > 1 )          /* recv from left - bottom */
-	MPI_Recv( &matrix[start_strip[myrank]-1][0], matrix_size+2, 
+	printf("iter n %d of proc %d is receiving from proc %d",myrank, bot_process, iter);
+  MPI_Recv( &matrix[start_strip[myrank]-1][0], matrix_size+2, 
 		  MPI_INT, bot_process, 101, MPI_COMM_WORLD,
 		  &recv_status );
       if ( myrank > 1 )          /* send to left - bottom */
-	MPI_Send( &matrix[start_strip[myrank]][0], matrix_size+2, 
+	printf("iter n %d of proc %d is sending to proc %d",myrank, bot_process, iter);
+  MPI_Send( &matrix[start_strip[myrank]][0], matrix_size+2, 
 		  MPI_INT, bot_process, 104, MPI_COMM_WORLD );
       if ( myrank < MPIsize-1 )  /* recv from right - top */
-	MPI_Recv( &matrix[end_strip[myrank]+1][0], matrix_size+2, 
+	printf("iter n %d of proc %d is receiving from proc %d",myrank, top_process);
+  MPI_Recv( &matrix[end_strip[myrank]+1][0], matrix_size+2, 
 		  MPI_INT, top_process, 103, MPI_COMM_WORLD,
 		  &recv_status );
     }
@@ -204,18 +208,22 @@ void strips_boundary_exchange( int **matrix, int *start_strip,
   else
     {	      
        if ( myrank > 1 )           /* recv from left - bottom */
-	MPI_Recv( &matrix[start_strip[myrank]-1][0], matrix_size+2, 
+	printf("iter n %d of proc %d is receiving from proc %d",myrank, bot_process, iter);
+  MPI_Recv( &matrix[start_strip[myrank]-1][0], matrix_size+2, 
 		  MPI_INT, bot_process, 102, MPI_COMM_WORLD,
 		  &recv_status );
       if ( myrank < MPIsize-1 )   /* send to right - top */
-	MPI_Send( &matrix[end_strip[myrank]][0], matrix_size+2, 
+	printf("iter n %d of proc %d is sending to proc %d",myrank, top_process, iter);
+  MPI_Send( &matrix[end_strip[myrank]][0], matrix_size+2, 
 		  MPI_INT, top_process, 101, MPI_COMM_WORLD );
       if ( myrank < MPIsize-1 )   /* recv from right - top */
-	MPI_Recv( &matrix[end_strip[myrank]+1][0], matrix_size+2, 
+	printf("iter n %d of proc %d is receiving from proc %d",myrank, top_process, iter);
+  MPI_Recv( &matrix[end_strip[myrank]+1][0], matrix_size+2, 
 		  MPI_INT, top_process, 104, MPI_COMM_WORLD,
 		  &recv_status );       
       if ( myrank > 1 )           /* send to left - bottom */
-	MPI_Send( &matrix[start_strip[myrank]][0], matrix_size+2, 
+	printf("iter n %d of proc %d is sending to proc %d",myrank, bot_process, iter);
+  MPI_Send( &matrix[start_strip[myrank]][0], matrix_size+2, 
 		  MPI_INT, bot_process, 103, MPI_COMM_WORLD );
     }
 }
@@ -302,7 +310,7 @@ int main( int argc, char * argv[] )
 	  /* internal boundaries between strips */
 	  /* real boundary is not affected */
 	  strips_boundary_exchange( matrix, start_strip, end_strip,
-				    myrank, MPIsize );
+				    myrank, MPIsize, iter );
 
 	  /* synchronize all nodes */
 	  MPI_Barrier( MPI_COMM_WORLD );
