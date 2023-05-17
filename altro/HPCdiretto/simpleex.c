@@ -10,7 +10,7 @@ int main(int argc, char *argv[]) {
 
     int rank, size;
     int start, end, chunk_size;
-    int i, sum = 0, partial_sum = 0;
+    int i, sum = 0, partial_sum = 1;
 
     MPI_Init(&argc, &argv);
     MPI_Comm_rank(MPI_COMM_WORLD, &rank);
@@ -26,7 +26,7 @@ int main(int argc, char *argv[]) {
     // Suddivide il lavoro del for loop utilizzando OpenMP
     #pragma omp parallel for schedule(static)
     for (i = start; i <= end; i++) {
-        partial_sum * i;
+        partial_sum = partial_sum * i;
     }
 
     // Somma parziale di ogni processo
