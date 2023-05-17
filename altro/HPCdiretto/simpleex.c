@@ -18,7 +18,7 @@ int main(int argc, char *argv[]) {
     end = start + chunk_size - 1;
 
     // Suddivide il lavoro del for loop utilizzando OpenMP
-    #pragma omp parallel for reduction(+:partial_sum)
+    #pragma omp parallel for schedule(static)
     for (i = start; i <= end; i++) {
         partial_sum += i;
     }
