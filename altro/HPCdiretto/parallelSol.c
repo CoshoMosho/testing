@@ -180,52 +180,52 @@ void strips_boundary_exchange( int **matrix, int *start_strip,
 
   top_process = myrank+1;
   bot_process = myrank-1;
+printf("iter n %d of proc %d", iter, myrank);
 
-
-  /* odd nodes */
-  if ( myrank % 2 != 0 )
-    {
-      if ( myrank < MPIsize-1 )  /* send to right - top */
-	printf("iter n %d of proc %d is sending to proc %d",myrank, top_process, iter);
-  MPI_Send( &matrix[end_strip[myrank]][0], matrix_size+2, 
-		  MPI_INT, top_process, 102, MPI_COMM_WORLD );
-      if ( myrank > 1 )          /* recv from left - bottom */
-	printf("iter n %d of proc %d is receiving from proc %d",myrank, bot_process, iter);
-  MPI_Recv( &matrix[start_strip[myrank]-1][0], matrix_size+2, 
-		  MPI_INT, bot_process, 101, MPI_COMM_WORLD,
-		  &recv_status );
-      if ( myrank > 1 )          /* send to left - bottom */
-	printf("iter n %d of proc %d is sending to proc %d",myrank, bot_process, iter);
-  MPI_Send( &matrix[start_strip[myrank]][0], matrix_size+2, 
-		  MPI_INT, bot_process, 104, MPI_COMM_WORLD );
-      if ( myrank < MPIsize-1 )  /* recv from right - top */
-	printf("iter n %d of proc %d is receiving from proc %d",myrank, top_process);
-  MPI_Recv( &matrix[end_strip[myrank]+1][0], matrix_size+2, 
-		  MPI_INT, top_process, 103, MPI_COMM_WORLD,
-		  &recv_status );
-    }
-  /* even nodes */
-  else
-    {	      
-       if ( myrank > 1 )           /* recv from left - bottom */
-	printf("iter n %d of proc %d is receiving from proc %d",myrank, bot_process, iter);
-  MPI_Recv( &matrix[start_strip[myrank]-1][0], matrix_size+2, 
-		  MPI_INT, bot_process, 102, MPI_COMM_WORLD,
-		  &recv_status );
-      if ( myrank < MPIsize-1 )   /* send to right - top */
-	printf("iter n %d of proc %d is sending to proc %d",myrank, top_process, iter);
-  MPI_Send( &matrix[end_strip[myrank]][0], matrix_size+2, 
-		  MPI_INT, top_process, 101, MPI_COMM_WORLD );
-      if ( myrank < MPIsize-1 )   /* recv from right - top */
-	printf("iter n %d of proc %d is receiving from proc %d",myrank, top_process, iter);
-  MPI_Recv( &matrix[end_strip[myrank]+1][0], matrix_size+2, 
-		  MPI_INT, top_process, 104, MPI_COMM_WORLD,
-		  &recv_status );       
-      if ( myrank > 1 )           /* send to left - bottom */
-	printf("iter n %d of proc %d is sending to proc %d",myrank, bot_process, iter);
-  MPI_Send( &matrix[start_strip[myrank]][0], matrix_size+2, 
-		  MPI_INT, bot_process, 103, MPI_COMM_WORLD );
-    }
+  // /* odd nodes */
+  // if ( myrank % 2 != 0 )
+  //   {
+  //     if ( myrank < MPIsize-1 )  /* send to right - top */
+	// printf("iter n %d of proc %d is sending to proc %d",myrank, top_process, iter);
+  // MPI_Send( &matrix[end_strip[myrank]][0], matrix_size+2, 
+	// 	  MPI_INT, top_process, 102, MPI_COMM_WORLD );
+  //     if ( myrank > 1 )          /* recv from left - bottom */
+	// printf("iter n %d of proc %d is receiving from proc %d",myrank, bot_process, iter);
+  // MPI_Recv( &matrix[start_strip[myrank]-1][0], matrix_size+2, 
+	// 	  MPI_INT, bot_process, 101, MPI_COMM_WORLD,
+	// 	  &recv_status );
+  //     if ( myrank > 1 )          /* send to left - bottom */
+	// printf("iter n %d of proc %d is sending to proc %d",myrank, bot_process, iter);
+  // MPI_Send( &matrix[start_strip[myrank]][0], matrix_size+2, 
+	// 	  MPI_INT, bot_process, 104, MPI_COMM_WORLD );
+  //     if ( myrank < MPIsize-1 )  /* recv from right - top */
+	// printf("iter n %d of proc %d is receiving from proc %d",myrank, top_process);
+  // MPI_Recv( &matrix[end_strip[myrank]+1][0], matrix_size+2, 
+	// 	  MPI_INT, top_process, 103, MPI_COMM_WORLD,
+	// 	  &recv_status );
+  //   }
+  // /* even nodes */
+  // else
+  //   {	      
+  //      if ( myrank > 1 )           /* recv from left - bottom */
+	// printf("iter n %d of proc %d is receiving from proc %d",myrank, bot_process, iter);
+  // MPI_Recv( &matrix[start_strip[myrank]-1][0], matrix_size+2, 
+	// 	  MPI_INT, bot_process, 102, MPI_COMM_WORLD,
+	// 	  &recv_status );
+  //     if ( myrank < MPIsize-1 )   /* send to right - top */
+	// printf("iter n %d of proc %d is sending to proc %d",myrank, top_process, iter);
+  // MPI_Send( &matrix[end_strip[myrank]][0], matrix_size+2, 
+	// 	  MPI_INT, top_process, 101, MPI_COMM_WORLD );
+  //     if ( myrank < MPIsize-1 )   /* recv from right - top */
+	// printf("iter n %d of proc %d is receiving from proc %d",myrank, top_process, iter);
+  // MPI_Recv( &matrix[end_strip[myrank]+1][0], matrix_size+2, 
+	// 	  MPI_INT, top_process, 104, MPI_COMM_WORLD,
+	// 	  &recv_status );       
+  //     if ( myrank > 1 )           /* send to left - bottom */
+	// printf("iter n %d of proc %d is sending to proc %d",myrank, bot_process, iter);
+  // MPI_Send( &matrix[start_strip[myrank]][0], matrix_size+2, 
+	// 	  MPI_INT, bot_process, 103, MPI_COMM_WORLD );
+  //   }
 }
 
 
