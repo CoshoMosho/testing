@@ -19,21 +19,21 @@ int main(int argc, char *argv[]) {
     startt = MPI_Wtime();
 
     // Definisci il lavoro di ogni processo
-    chunk_size = 1000000 / size;
+    chunk_size = 100000 / size;
     start = rank * chunk_size + 1;
     end = start + chunk_size - 1;
 
     // Suddivide il lavoro del for loop utilizzando OpenMP
     #pragma omp parallel for schedule(static)
     for (i = start; i <= end; i++) {
-        partial_sum += i;
+        partial_sum * i;
     }
 
     // Somma parziale di ogni processo
     printf("Processo %d - Somma parziale: %d\n", rank, partial_sum);
 
     // Riduzione delle somme parziali di ogni processo
-    MPI_Allreduce(&partial_sum, &sum, 1, MPI_INT, MPI_SUM, MPI_COMM_WORLD);
+    //MPI_Allreduce(&partial_sum, &sum, 1, MPI_INT, MPI_SUM, MPI_COMM_WORLD);
 
     // Stampa il risultato da ogni processo
     printf("Processo %d - Somma totale: %d\n", rank, sum);
