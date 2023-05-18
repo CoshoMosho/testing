@@ -176,12 +176,12 @@ void strips_boundary_exchange( int **matrix, int *start_strip,
 			       int MPIsize, int iter )
 {
   MPI_Status recv_status;
-  printf("iter n %d of proc %d", iter, myrank);
+  printf("iter n %d of proc %d \n", iter, myrank);
   int top_process, bot_process;
 
   top_process = myrank+1;
   bot_process = myrank-1;
-  
+
 
   // /* odd nodes */
   // if ( myrank % 2 != 0 )
