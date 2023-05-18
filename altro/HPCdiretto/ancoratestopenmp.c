@@ -1,7 +1,7 @@
 #include <stdio.h>
 #include <omp.h>
 
-#define SIZE 100
+#define SIZE 10000
 
 void game_of_life(int matrix[SIZE][SIZE]) {
     // ...
