@@ -67,7 +67,7 @@ void swap_matrices(  int ** matrix, int ** temp,
 
   /* Swap the matrices */
   *changes = 0;
-  #pragma omp parallel for private(i, j) shared(matrix, temp, aux)
+  //#pragma omp parallel for private(i, j) shared(matrix, temp, aux)
   for (i = la; i <= lb; i++) 
     {
       for (j = 1; j <= matrix_size; j++) 
