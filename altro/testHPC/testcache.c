@@ -21,6 +21,7 @@ The step('i' value) at which there is a significant change in time taken will co
       totalTime=0;
       for(j=0;j<6;j++){
          start = clock();
+         void *add = &start;
          for(k=0;k<512*KB;k++){
             tmp +=array[(k*i)&lengthMod];   
          }

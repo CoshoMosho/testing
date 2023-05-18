@@ -46,6 +46,8 @@
 int main( int argc, char **argv )
 {
 
+  printf("f");
+
   int     N        = N_default;
   int     nthreads = 1;
   
