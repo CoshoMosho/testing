@@ -1,7 +1,7 @@
 #include <stdio.h>
 #include <omp.h>
 
-#define SIZE 10000000
+#define SIZE 1000000000
 
 int main() {
     int i;
