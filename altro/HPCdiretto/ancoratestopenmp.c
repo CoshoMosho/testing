@@ -1,14 +1,12 @@
 #include <stdio.h>
 #include <omp.h>
-#include <time.h>
 
 #define SIZE 100
 
 void game_of_life(int matrix[SIZE][SIZE]) {
     int i, j;
     int new_matrix[SIZE][SIZE];
-
-       
+    
     #pragma omp parallel for private(i, j) shared(matrix, new_matrix)
     for (i = 1; i < SIZE - 1; i++) {
         for (j = 1; j < SIZE - 1; j++) {
@@ -52,10 +50,6 @@ int main() {
     int matrix[SIZE][SIZE];
     int i, j;
     
-    clock_t inizio, fine;
-    double tempo_di_esecuzione;
-    inizio = clock();
-
     // Inizializza la matrice con valori casuali
     for (i = 0; i < SIZE; i++) {
         for (j = 0; j < SIZE; j++) {
@@ -67,11 +61,6 @@ int main() {
     for (int iter = 0; iter < 100; iter++) {
         game_of_life(matrix);
     }
-
-    fine = clock();
-    tempo_di_esecuzione = ((double)(fine - inizio) / CLOCKS_PER_SEC) * 1000;
-    printf("Tempo di esecuzione: %f ms\n", tempo_di_esecuzione);
-    
     
     return 0;
 }
