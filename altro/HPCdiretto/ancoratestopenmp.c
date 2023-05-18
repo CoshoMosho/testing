@@ -4,46 +4,9 @@
 #define SIZE 100
 
 void game_of_life(int matrix[SIZE][SIZE]) {
-    int i, j;
-    int new_matrix[SIZE][SIZE];
-    
-    #pragma omp parallel for private(i, j) shared(matrix, new_matrix)
-    for (i = 1; i < SIZE - 1; i++) {
-        for (j = 1; j < SIZE - 1; j++) {
-            int neighbors = 0;
-            
-            // Calcolo il numero di vicini vivi
-            neighbors += matrix[i-1][j-1];
-            neighbors += matrix[i-1][j];
-            neighbors += matrix[i-1][j+1];
-            neighbors += matrix[i][j-1];
-            neighbors += matrix[i][j+1];
-            neighbors += matrix[i+1][j-1];
-            neighbors += matrix[i+1][j];
-            neighbors += matrix[i+1][j+1];
-            
-            // Aggiorno lo stato delle celle
-            if (matrix[i][j] == 1) {
-                if (neighbors < 2 || neighbors > 3)
-                    new_matrix[i][j] = 0; // La cella muore
-                else
-                    new_matrix[i][j] = 1; // La cella sopravvive
-            } else {
-                if (neighbors == 3)
-                    new_matrix[i][j] = 1; // Una nuova cella viene generata
-                else
-                    new_matrix[i][j] = 0; // La cella rimane morta
-            }
-        }
-    }
-    
-    // Copio la nuova matrice nel posto della matrice originale
-    #pragma omp parallel for private(i, j) shared(matrix, new_matrix)
-    for (i = 1; i < SIZE - 1; i++) {
-        for (j = 1; j < SIZE - 1; j++) {
-            matrix[i][j] = new_matrix[i][j];
-        }
-    }
+    // ...
+    // Resto del codice del gioco della vita
+    // ...
 }
 
 int main() {
@@ -57,10 +20,17 @@ int main() {
         }
     }
     
+    double start_time = omp_get_wtime(); // Tempo di inizio
+    
     // Esegui il gioco della vita per un certo numero di iterazioni
     for (int iter = 0; iter < 100; iter++) {
         game_of_life(matrix);
     }
+    
+    double end_time = omp_get_wtime(); // Tempo di fine
+    double elapsed_time = end_time - start_time; // Tempo trascorso
+    
+    printf("Tempo di esecuzione: %.6f secondi\n", elapsed_time);
     
     return 0;
 }
