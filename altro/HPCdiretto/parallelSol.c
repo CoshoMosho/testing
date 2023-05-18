@@ -30,7 +30,8 @@ void new_generation(  int ** matrix, int ** temp,
   /* For each element of the matrix apply the */
   /* life game rules                          */
   /* store under temp                         */
-  #pragma omp parallel for schedule(static)
+  //#pragma omp parallel for schedule(static)
+  #pragma omp parallel for private(i, j) shared(matrix, temp)
   for (i = la; i <= lb; i++) 
     {
       for (j = 1; j <= matrix_size; j++) 
@@ -66,6 +67,7 @@ void swap_matrices(  int ** matrix, int ** temp,
 
   /* Swap the matrices */
   *changes = 0;
+  #pragma omp parallel for private(i, j) shared(matrix, temp, aux)
   for (i = la; i <= lb; i++) 
     {
       for (j = 1; j <= matrix_size; j++) 
