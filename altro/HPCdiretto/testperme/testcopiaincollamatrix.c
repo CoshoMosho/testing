@@ -31,13 +31,13 @@ void moltiplicaMatrice(int matrice1[SIZE][SIZE], int matrice2[SIZE][SIZE], int r
     
 
 
-    printf("\nMatrice 2:\n");
-    for (int i = 0; i < righe; i++) {
-        for (int j = 0; j < colonne; j++) {
-            printf("thread numero %d opera sul %d \n",id, matrice2[i][j]);
-        }
-        printf("\n");
-    }
+    // printf("\nMatrice 2:\n");
+    // for (int i = 0; i < righe; i++) {
+    //     for (int j = 0; j < colonne; j++) {
+    //         printf("thread numero %d opera sul %d \n",id, matrice2[i][j]);
+    //     }
+    //     printf("\n");
+    // }
 }
 
 int main() {
@@ -61,13 +61,13 @@ int main() {
 
     moltiplicaMatrice(matrice1, matrice2, righe, colonne);
 
-    printf("Matrice 1:\n");
-    for (int i = 0; i < righe; i++) {
-        for (int j = 0; j < colonne; j++) {
-            printf("%d ", matrice1[i][j]);
-        }
-        printf("\n");
-    }
+    // printf("Matrice 1:\n");
+    // for (int i = 0; i < righe; i++) {
+    //     for (int j = 0; j < colonne; j++) {
+    //         printf("%d ", matrice1[i][j]);
+    //     }
+    //     printf("\n");
+    // }
 
     double end_time = omp_get_wtime(); // Tempo di fine
     double elapsed_time = end_time - start_time; // Tempo trascorso
