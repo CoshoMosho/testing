@@ -2,7 +2,7 @@
 cpu: test.x
 
 test.x: main.c
-	gcc -o main.x
+	mpicc -o main.x
 
 
 clean:
