@@ -2,7 +2,7 @@
 cpu: test.x
 
 test.x: main.c
-	gcc -o $@
+	gcc -o main.x
 
 
 clean:
